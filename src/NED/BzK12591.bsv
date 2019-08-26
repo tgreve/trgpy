@@ -1,0 +1,41 @@
+
+Results from query to  NASA/IPAC Extragalactic Database (NED),
+which is operated by the Jet Propulsion Laboratory, California Institute of
+Technology, under contract with the National Aeronautics and Space Administration.
+This work was (partially) supported by the US National Virtual Observatory
+development project, which is funded by the National Science Foundation
+under cooperative agreement AST0122449 with The Johns Hopkins University.
+
+
+
+queryDateTime:2013-07-31T10:39:41PDT
+
+
+
+Photometric Data for BzK12591 (z=1.60019)
+
+No.|Observed Passband|Photometry Measurement|Uncertainty|Units|Frequency|NED Photometry Measurement|NED Uncertainty|NED Units|Refcode|Significance|Published frequency|Frequency Mode|Coordinates Targeted|Spatial Mode|Qualifiers|Comments
+1|4.0-8 keV (Chandra)  |           |<0.65E-15  |ergs cm^-2^ s^-1^   |1.45E+18|          |4.48E-11|Jy|2003AJ....126..539A|3 sigma|       6   keV       | Broad-band measurement|12 37 41.31 +62 12 51.4 (J2000)| Flux integrated from map|                                        |From new raw data; NED frequency assigned to mid-point ofband in keV
+2|4-8 keV (Chandra)    |           |<0.87E-15  |erg cm^-2^ s^-1^    |1.45E+18|          |6.00E-11|Jy|2001AJ....122.2810B|3sigma |       6   keV       | Broad-band measurement|12 37 41.39 +62 12 51.1 (J2000)| Flux in fixed aperture|                                        |From new raw data; NED frequency assigned to mid-point ofband in keV
+3|2-8 keV (Chandra)    | 0.75E-15  |+/-4       |erg cm^-2^ s^-1^    |1.21E+18|  6.20E-11|+/-2.48E-12|Jy|2001AJ....122.2810B|estimated error|       5   keV       | Broad-band measurement|12 37 41.39 +62 12 51.1 (J2000)| Flux in fixed aperture|                                        |From new raw data; NED frequency assigned to mid-point ofband in keV
+4|2.0-8 keV (Chandra)  |           |<0.49E-15  |ergs cm^-2^ s^-1^   |1.21E+18|          |4.05E-11|Jy|2003AJ....126..539A|3 sigma|       5   keV       | Broad-band measurement|12 37 41.31 +62 12 51.4 (J2000)| Flux integrated from map|                                        |From new raw data; NED frequency assigned to mid-point ofband in keV
+5|0.5-8 keV (Chandra)  | 0.82E-15  |+/-4       |erg cm^-2^ s^-1^    |1.03E+18|  7.96E-11|+/-3.18E-12|Jy|2001AJ....122.2810B|estimated error|    4.25   keV       | Broad-band measurement|12 37 41.39 +62 12 51.1 (J2000)| Flux in fixed aperture|                                        |From new raw data; NED frequency assigned to mid-point ofband in keV
+6|0.5-8 keV (Chandra)  | 0.66E-15  |           |ergs cm^-2^ s^-1^   |1.03E+18|  6.42E-11| |Jy|2003AJ....126..539A|no uncertainty reported|    4.25   keV       | Broad-band measurement|12 37 41.31 +62 12 51.4 (J2000)| Flux integrated from map|                                        |From new raw data; NED frequency assigned to mid-point ofband in keV
+7|2.0-4 keV (Chandra)  | 0.14E-15  |           |ergs cm^-2^ s^-1^   |7.25E+17|  1.93E-11| |Jy|2003AJ....126..539A|no uncertainty reported|       3   keV       | Broad-band measurement|12 37 41.31 +62 12 51.4 (J2000)| Flux integrated from map|                                        |From new raw data; NED frequency assigned to mid-point ofband in keV
+8|1.0-2 keV (Chandra)  |           |<0.05E-15  |ergs cm^-2^ s^-1^   |3.63E+17|          |1.38E-11|Jy|2003AJ....126..539A|3 sigma|     1.5   keV       | Broad-band measurement|12 37 41.31 +62 12 51.4 (J2000)| Flux integrated from map|                                        |From new raw data; NED frequency assigned to mid-point ofband in keV
+9|0.5-2 keV (Chandra)  | 0.09E-15  |           |ergs cm^-2^ s^-1^   |3.02E+17|  2.98E-11| |Jy|2003AJ....126..539A|no uncertainty reported|    1.25   keV       | Broad-band measurement|12 37 41.31 +62 12 51.4 (J2000)| Flux integrated from map|                                        |From new raw data; NED frequency assigned to mid-point ofband in keV
+10|0.5-2 keV (Chandra) | 0.08E-15 |+/-4       |erg cm^-2^ s^-1^    |3.02E+17|  2.65E-11|+/-1.06E-12|Jy|2001AJ....122.2810B|estimated error|    1.25   keV       | Broad-band measurement|12 37 41.39 +62 12 51.1 (J2000)| Flux in fixed aperture|                                        |From new raw data; NED frequency assigned to mid-point ofband in keV
+11|0.5-1 keV (Chandra) | 0.06E-15 |           |ergs cm^-2^ s^-1^   |1.81E+17|  3.31E-11| |Jy|2003AJ....126..539A|no uncertainty reported|    0.75   keV       | Broad-band measurement|12 37 41.31 +62 12 51.4 (J2000)| Flux integrated from map|                                        |From new raw data; NED frequency assigned to mid-point ofband in keV
+12|R (Keck II) AB      | 23.83    |           | mag                |4.62E+14|  1.07E-06| |Jy|2004AJ....127.3121W|no uncertainty reported|   648.7   A         | Broad-band measurement|12 37 41.378 +62 12 51.06 (J2000)| Total flux|                                        |From new raw data
+10|24 microns (MIPS)   | 377.0     |+/-6.0  |microJy             |1.27E+13| 3.77E-04|+/-6.0E-06|Jy|2011AJ....141....1T|rms uncertainty|     23.68 microns   | Broad-band measurement|189.125366 62.241077 (J2000)| Flux in fixed aperture|                                        |Averaged from previously published data
+11|70 microns (PACS)   |           |<3.3    |mJy                 |4.283E+12|         |3.3E-03|Jy|2004MNRAS.354..779G|3sigma uncertainty|      1200 microns   | Broad-band measurement|16 36 55.9 +40 59 12 (J2000)| Flux integrated from map|S/N = 3.66                              |From new raw data
+12|100 microns (PACS)  | 9.8       |+/-0.4  |microJy             |2.998e+12| 9.8E-03 |+/-0.4E-03 |Jy|2.40e+01 |0.00e+00 |-9.90e+01 |-9.90e+01 |-9.90e+01 | NaN|
+13|160 microns (PACS)  | 18.3       |+/-1.1  |microJy             |1.874e+12| 18.3E-03 |+/-1.1E-03 |Jy|2.40e+01 |0.00e+00 |-9.90e+01 |-9.90e+01 |-9.90e+01 | NaN|
+14|250 microns (SPIRE) | 24.9       |+/-2.5  |mJy                 |1.199e+12| 24.9E-03 |+/-2.5e-03 |Jy|2.40e+01 |0.00e+00 |-9.90e+01 |-9.90e+01 |-9.90e+01 | NaN|
+15|350 microns (SPIRE) | 20.5       |+/-3.0    |mJy                 |8.565E+11|20.5E-03|+/-3.0E-03|Jy|2004MNRAS.354..779G|3sigma uncertainty|      1200 microns   | Broad-band measurement|16 36 55.9 +40 59 12 (J2000)| Flux integrated from map|S/N = 3.66                              |From new raw data
+16|500 microns (SPIRE) | 9.9        |+/-4.0   |mJy                 |5.996E+11| 9.9E-03 |4.0E-03|Jy|2004MNRAS.354..779G|3sigma uncertainty|      1200 microns   | Broad-band measurement|16 36 55.9 +40 59 12 (J2000)| Flux integrated from map|S/N = 3.66                              |From new raw data
+17|1160 microns (Penner)|         |<1.7    |mJy                 |2.58442E+11|       |1.7E-03|Jy|2004MNRAS.354..779G|3sigma uncertainty|      1200 microns   | Broad-band measurement|16 36 55.9 +40 59 12 (J2000)| Flux integrated from map|S/N = 3.66                              |From new raw data
+13|CO[2-1] (IRAM)      | 0.84      | |Jy km/s             |2.31E+11|  9.56E+04| |Jy-Hz|2010ApJ...713..686D|no uncertainty reported|   230.538 GHz       | Line measurement; flux integrated over line; lines measured in emission|12 37 41.371 +62 12 51.06 (J2000)| Flux integrated from map|                                        |From new raw data
+14|1.4 GHz (VLA)       | 163       |+/-7    | microJy            |1.40E+09|  1.63E-04|+/-7.00E-06|Jy|2006MNRAS.371..963B|1 sigma|       1.4 GHz       | Broad-band measurement|12 37 41.378 +62 12 51.27 (J2000)| Flux integrated from map|                                        |Averaged new and previously published data
+15|1.4 GHz (VLA)       | 179.9     |+/-7.6  |microJy             |1.40E+09|  1.80E-04|+/-7.60E-06|Jy|2010ApJS..188..178M|uncertainty|       1.4 GHz       | Broad-band measurement|12 37 41.37 +62 12 51.1 (J2000)| Total flux; Beam filling or dilution corrected|Major=0.8"; Minor=0.0"; PA=0 deg        |From new raw data
+16|1.4 GHz             | 163.0     |+/-11.7 |microJy             |1.40E+09|  1.63E-04|+/-1.17E-05|Jy|2000ApJ...533..611R|1 sigma|1.4        GHz       | Broad-band measurement; broad-band flux derived by integration over spectrum; synthetic band|123741.381 +621251.27 (J2000)| Flux integrated from map; Pointing and beam filling|                                        |From new raw data; Corrected for contaminating sources

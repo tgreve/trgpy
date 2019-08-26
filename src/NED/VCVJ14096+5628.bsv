@@ -1,0 +1,35 @@
+
+Results from query to  NASA/IPAC Extragalactic Database (NED),
+which is operated by the Jet Propulsion Laboratory, California Institute of
+Technology, under contract with the National Aeronautics and Space Administration.
+This work was (partially) supported by the US National Virtual Observatory
+development project, which is funded by the National Science Foundation
+under cooperative agreement AST0122449 with The Johns Hopkins University.
+
+
+
+queryDateTime:2016-07-10T07:09:01PDT
+
+
+
+Photometric Data for SBS 1408+567
+
+No.|Observed Passband|Photometry Measurement|Uncertainty|Units|Frequency|NED Photometry Measurement|NED Uncertainty|NED Units|Refcode|Significance|Published frequency|Frequency Mode|Coordinates Targeted|Spatial Mode|Qualifiers|Comments
+1|u (SDSS PSF) AB     | 18.360    |+/-0.025|asinh mag           |8.36E+14|  1.71E-04|+/-3.93E-06|Jy|2007SDSS6.C...0000:|based on count statistics only|3585       A         | Broad-band measurement|212.4815835573 56.4740078509 (J2000)| Modelled datum|SDSS flags: CHILD - object is part of a blended parent object; BAD_RADIAL - some low S/N radial points; BINNED1 - detected at >=5 sigma in original imaging frame;|From new raw data
+2|g (SDSS PSF) AB     | 17.549    |+/-0.028|asinh mag           |6.17E+14|  3.47E-04|+/-8.95E-06|Jy|2007SDSS6.C...0000:|based on count statistics only|4858       A         | Broad-band measurement|212.4815835573 56.4740078509 (J2000)| Modelled datum|SDSS flags: CHILD - object is part of a blended parent object; BAD_RADIAL - some low S/N radial points; BINNED1 - detected at >=5 sigma in original imaging frame;|From new raw data
+3|r (SDSS PSF) AB     | 17.116    |+/-0.018|asinh mag           |4.77E+14|  5.17E-04|+/-8.57E-06|Jy|2007SDSS6.C...0000:|based on count statistics only|6290       A         | Broad-band measurement|212.4815835573 56.4740078509 (J2000)| Modelled datum|SDSS flags: CHILD - object is part of a blended parent object; BAD_RADIAL - some low S/N radial points; INTERP - object contains interpolated-over pixels; BINNED1 - detected at >=5 sigma in original imaging frame; CANONICAL_BAND - this band was primary (usually r);|From new raw data
+4|H{alpha} (TNG)      | 1.4E-14   |+/-20  %|erg/s/cm^2^         |4.57E+14|  1.40E+09|+/-2.80E+08|Jy-Hz|2011A&A...531A.128O|uncertainty|      6563 A         | Line measurement; flux integrated over line; lines measured in emission|14 09 55 +56 28 27 (J2000)| From fitting to map|Broad component flux                    |From new raw data
+5|H{alpha} (TNG)      | 4.6E-15   |+/-20  %|erg/s/cm^2^         |4.57E+14|  4.60E+08|+/-9.20E+07|Jy-Hz|2011A&A...531A.128O|uncertainty|      6563 A         | Line measurement; flux integrated over line; lines measured in emission|14 09 55 +56 28 27 (J2000)| From fitting to map|Intermediate component flux             |From new raw data
+6|i (SDSS PSF) AB     | 17.046    |+/-0.022|asinh mag           |3.89E+14|  5.52E-04|+/-1.12E-05|Jy|2007SDSS6.C...0000:|based on count statistics only|7706       A         | Broad-band measurement|212.4815835573 56.4740078509 (J2000)| Modelled datum|SDSS flags: CHILD - object is part of a blended parent object; BAD_RADIAL - some low S/N radial points; BINNED1 - detected at >=5 sigma in original imaging frame;|From new raw data
+7|z (SDSS PSF) AB     | 16.862    |+/-0.027|asinh mag           |3.25E+14|  6.42E-04|+/-1.60E-05|Jy|2007SDSS6.C...0000:|based on count statistics only|9222       A         | Broad-band measurement|212.4815835573 56.4740078509 (J2000)| Modelled datum|SDSS flags: CHILD - object is part of a blended parent object; BAD_RADIAL - some low S/N radial points; BINNED1 - detected at >=5 sigma in original imaging frame;|From new raw data
+8|350 microns SHARC II| 112       |+/-12   |milliJy             |8.57E+11|  1.12E-01|+/-1.20E-02|Jy|2006ApJ...642..694B|1 sigma|     350   microns   | Broad-band measurement|14 09 55.56 +56 28 26.50 (J2000)| Flux integrated from map|                                        |From new raw data
+9|CO(7-6) line (PdBI) | 4.1       |+/-1.0  | Jy km/s            |8.06E+11|  5.07E+08|+/-1.24E+08|Jy-Hz|2004A&A...423..441B|uncertainty|    774424 km s^-1^  | Line measurement; flux integrated over line; lines measured in emission|14 09 55.5 +56 28 27 (J2000)| Flux integrated from map|                                        |From new raw data
+10|CO(3-2) (OVRO)      | 2.4       |+/-0.7  | Jy km/s            |3.46E+11|  7.72E+05|+/-2.25E+05|Jy-Hz|2004ApJ...609...61H|uncertainty|   2.585             | Line measurement; flux integrated over line; lines measured in emission|14 09 55.50 +56 28 27.0 (J2000)| Flux integrated from map|                                        |From new raw data
+11|CO(3-2) line (PdBI) | 2.3       |+/-0.2  | Jy km/s            |3.46E+11|  1.22E+08|+/-1.06E+07|Jy-Hz|2004A&A...423..441B|uncertainty|    774424 km s^-1^  | Line measurement; flux integrated over line; lines measured in emission|14 09 55.5 +56 28 27 (J2000)| Flux integrated from map|                                        |From new raw data
+12|250 GHz (IRAM/MAMBO)| 10.7E-03  |+/-0.6E-03|Jy                  |2.50E+11|  1.07E-02|+/-6.00E-04|Jy|2006AJ....132.1307P|1 sigma|     250   GHz       | Broad-band measurement|14 09 55.60 +56 28 26.2 (J2000)| Flux integrated from map|From 2003A&A...398..857O                |Averaged from previously published data
+13|225.12 GHz (PdBI)   | 6         |+/-2    | milliJy            |2.25E+11|  6.00E-03|+/-2.00E-03|Jy|2004A&A...423..441B|uncertainty|  225.1197 GHz       | Broad-band measurement|14 09 55.5 +56 28 27 (J2000)| Flux integrated from map|                                        |From new raw data
+13|117 GHz (PdBI)      | 63        |+/-7    | microJy            |1.17E+11|  63.0E-06|+/-7.00E-06|Jy|2004A&A...423..441B|uncertainty|  225.1197 GHz       | Broad-band measurement|14 09 55.5 +56 28 27 (J2000)| Flux integrated from map|                                        |From new raw data
+15|96.5 GHz (PdBI)     ||<0.5       | milliJy            |9.65E+10||5.00E-04|Jy|2004A&A...423..441B|3 sigma|    96.504 GHz       | Broad-band measurement|14 09 55.5 +56 28 27 (J2000)| Flux integrated from map|                                        |From new raw data
+16|5.0 GHz (VLA)       | 310E-06   |+/-60E-06|Jy                  |5.00E+09|  3.10E-04|+/-6.00E-05|Jy|2006AJ....132.1307P|1 sigma|     5.0   GHz       | Broad-band measurement|14 09 55.60 +56 28 26.2 (J2000)| Flux integrated from map|                                        |From new raw data
+17|1.4 GHz (VLA)       | 940E-06   |+/-20E-06|Jy                  |1.40E+09|  9.40E-04|+/-2.00E-05|Jy|2006AJ....132.1307P|1 sigma|     1.4   GHz       | Broad-band measurement|14 09 55.60 +56 28 26.2 (J2000)| Flux integrated from map|                                        |From new raw data
+14|1.4 GHz (VLA)       | 0.93      |+/-0.022| milliJy            |1.40E+11|  9.30E-04|+/-2.20E-05|Jy|2004A&A...423..441B|uncertainty|    1.4    GHz       | Broad-band measurement|14 09 55.57 +56 28 26.47 (J2000)| Flux integrated from map|                                        |From new raw data

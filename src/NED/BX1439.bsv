@@ -1,0 +1,41 @@
+
+Results from query to  NASA/IPAC Extragalactic Database (NED),
+which is operated by the Jet Propulsion Laboratory, California Institute of
+Technology, under contract with the National Aeronautics and Space Administration.
+This work was (partially) supported by the US National Virtual Observatory
+development project, which is funded by the National Science Foundation
+under cooperative agreement AST0122449 with The Johns Hopkins University.
+
+
+
+queryDateTime:2016-06-14T02:24:13PDT
+
+
+
+Photometric Data for GOODS J123653.66+621724.5
+
+No.|Observed Passband|Photometry Measurement|Uncertainty|Units|Frequency|NED Photometry Measurement|NED Uncertainty|NED Units|Refcode|Significance|Published frequency|Frequency Mode|Coordinates Targeted|Spatial Mode|Qualifiers|Comments
+1|U (KPNO) AB         | 24.95     ||mag                 |8.44E+14|  3.80E-07||Jy|2006ApJ...653.1004R|no uncertainty reported|    3550   A         | Broad-band measurement|123653.66 +621724.3 (J2000)| Flux in fixed aperture|                                        |Averaged new and previously published data; derived from aflux in a different band and a color
+2|G (WHT)             | 24.16     ||mag                 |6.38E+14|  7.87E-07||Jy|2006ApJ...647..128E|no uncertainty reported|    0.47   microns   | Broad-band measurement|| Flux in fixed aperture|                                        |Averaged from previously published data
+3|G (KECK) AB         | 24.16     ||mag                 |6.27E+14|  7.87E-07||Jy|2006ApJ...653.1004R|no uncertainty reported|    4780   A         | Broad-band measurement|123653.66 +621724.3 (J2000)| Flux in fixed aperture|                                        |Averaged new and previously published data; derived from aflux in a different band and a color
+4|R (Keck II) AB      | 24.31     || mag                |4.62E+14|  6.86E-07||Jy|2004AJ....127.3121W|no uncertainty reported|   648.7   A         | Broad-band measurement|12 36 53.671 +62 17 24.10 (J2000)| Total flux|                                        |From new raw data
+5|H{alpha} (Keck II)  | 8.8E-17   |+/-0.3E-17|erg s^-1^ cm^-2^    |4.57E+14|  8.80E+06|+/-3.00E+05|Jy-Hz|2006ApJ...646..107E|uncertainty|    6563   A         | Line measurement; flux integrated over line; lines measured in emission|12 36 53.66 +62 17 24.27 (J2000)| Flux integrated from map|                                        |Averaged new and previously published data
+6|H{alpha} (Subaru)   | 9.6E-17   |+/-0.9E-17|erg/s/cm^2^         |4.57E+14|  9.60E+06|+/-9.00E+05|Jy-Hz|2010ApJ...718..112Y|uncertainty|      6563 A         | Line measurement; flux integrated over line; lines measured in emission|12 36 53.65 +62 17 24.3 (J2000)| Flux integrated from map|                                        |From new raw data
+7|R (KECK) AB         | 23.90     ||mag                 |4.39E+14|  1.00E-06||Jy|2006ApJ...653.1004R|no uncertainty reported|    6830   A         | Broad-band measurement|123653.66 +621724.3 (J2000)| Flux in fixed aperture|                                        |Averaged new and previously published data
+8|J (WIRC) AB         | 22.78     ||mag                 |2.40E+14|  2.81E-06||Jy|2006ApJ...653.1004R|no uncertainty reported|   1.250   microns   | Broad-band measurement|123653.66 +621724.3 (J2000)| Flux in fixed aperture|                                        |Averaged new and previously published data
+9|J (Hale/WIRC)       | 21.88     ||mag                 |2.40E+14|  2.76E-06||Jy|2006ApJ...646..107E|no uncertainty reported|    1.25   microns   | Broad-band measurement|12 36 53.66 +62 17 24.27 (J2000)| Flux in fixed aperture|                                        |Averaged new and previously published data; derived from aflux in a different band and a color
+10|K_s (WIRC) AB       | 21.54     ||mag                 |1.39E+14|  8.79E-06||Jy|2006ApJ...653.1004R|no uncertainty reported|   2.150   microns   | Broad-band measurement|123653.66 +621724.3 (J2000)| Flux in fixed aperture|                                        |Averaged new and previously published data
+11|K_s (Subaru) AB     | 21.9      ||mag                 |1.39E+14|  6.31E-06||Jy|2010ApJ...718..112Y|no uncertainty reported|      2.15 microns   | Broad-band measurement|12 36 53.65 +62 17 24.3 (J2000)| Total flux|                                        |Averaged from previously published data
+12|K_s (Hale/WIRC)     | 19.72     ||mag                 |1.39E+14|  8.67E-06||Jy|2006ApJ...646..107E|no uncertainty reported|    2.15   microns   | Broad-band measurement|12 36 53.66 +62 17 24.27 (J2000)| Flux in fixed aperture|                                        |Averaged new and previously published data
+13|3.6 microns IRAC AB | 21.91     |+/-0.07 |mag                 |8.44E+13|  6.25E-06|+/-4.03E-07|Jy|2006ApJ...653.1004R|uncertainty|   3.550   microns   | Broad-band measurement|123653.66 +621724.3 (J2000)| Flux integrated from map|                                        |From new raw data
+14|3.6 microns (IRAC)  | 7.68      |+/-0.03 |microJy             |8.44E+13|  7.68E-06|+/-3.00E-08|Jy|2009ApJ...705...68B|uncertainty|     3.550 microns   | Broad-band measurement|189.225 62.2907 (J2000)| Flux in fixed aperture|                                        |Averaged from previously published data
+15|4.5 microns (IRAC)  | 8.02      |+/-0.05 |microJy             |6.67E+13|  8.02E-06|+/-5.00E-08|Jy|2009ApJ...705...68B|uncertainty|     4.493 microns   | Broad-band measurement|189.225 62.2907 (J2000)| Flux in fixed aperture|                                        |Averaged from previously published data
+16|4.5 microns IRAC AB | 21.82     |+/-0.09 |mag                 |6.67E+13|  6.79E-06|+/-5.63E-07|Jy|2006ApJ...653.1004R|uncertainty|   4.493   microns   | Broad-band measurement|123653.66 +621724.3 (J2000)| Flux integrated from map|                                        |From new raw data
+17|5.8 microns (IRAC)  | 7.20      |+/-0.34 |microJy             |5.23E+13|  7.20E-06|+/-3.40E-07|Jy|2009ApJ...705...68B|uncertainty|     5.731 microns   | Broad-band measurement|189.225 62.2907 (J2000)| Flux in fixed aperture|                                        |Averaged from previously published data
+18|5.8 microns IRAC AB | 21.82     |+/-0.12 |mag                 |5.23E+13|  6.79E-06|+/-7.51E-07|Jy|2006ApJ...653.1004R|uncertainty|   5.731   microns   | Broad-band measurement|123653.66 +621724.3 (J2000)| Flux integrated from map|                                        |From new raw data
+19|8.0 microns (IRAC)  | 6.16      |+/-0.37 |microJy             |3.81E+13|  6.16E-06|+/-3.70E-07|Jy|2009ApJ...705...68B|uncertainty|     7.872 microns   | Broad-band measurement|189.225 62.2907 (J2000)| Flux in fixed aperture|                                        |Averaged from previously published data
+20|8.0 microns IRAC AB | 22.05     |+/-0.21 |mag                 |3.81E+13|  5.50E-06|+/-1.06E-06|Jy|2006ApJ...653.1004R|uncertainty|   7.872   microns   | Broad-band measurement|123653.66 +621724.3 (J2000)| Flux integrated from map|                                        |From new raw data
+21|24 microns (MIPS)   | 85.3      |+/-9.4  |microJy             |1.27E+13|  8.53E-05|+/-9.40E-06|Jy|2006ApJ...653.1004R|uncertainty|   23.68   microns   | Broad-band measurement|123653.66 +621724.3 (J2000)| Flux integrated from map|                                        |From new raw data
+22|24 microns (MIPS)   | 73.0      |+/-5.8  |microJy             |1.27E+13|  7.30E-05|+/-5.80E-06|Jy|2009ApJ...705...68B|uncertainty|     23.68 microns   | Broad-band measurement|189.225 62.2907 (J2000)| Flux in fixed aperture|                                        |Averaged from previously published data
+23|24 microns (MIPS)   | 79.6      |+/-3.0  |microJy             |1.27E+13|  7.96E-05|+/-3.00E-06|Jy|2011A&A...528A..35M|uncertainty|     23.68 microns   | Broad-band measurement|12 36 53.65 +62 17 24.11 (J2000)| Flux integrated from map|                                        |From new raw data
+24|70 microns (MIPS)   | |<4.5     |milliJy             |4.20E+12||4.50E-03|Jy|2011A&A...528A..35M|3sigma uncertainty reported|     71.42 microns   | Broad-band measurement|12 36 53.65 +62 17 24.11 (J2000)| Flux integrated from map|                                        |From new raw data

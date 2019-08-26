@@ -1,0 +1,47 @@
+
+Results from query to  NASA/IPAC Extragalactic Database (NED),
+which is operated by the Jet Propulsion Laboratory, California Institute of
+Technology, under contract with the National Aeronautics and Space Administration.
+This work was (partially) supported by the US National Virtual Observatory
+development project, which is funded by the National Science Foundation
+under cooperative agreement AST0122449 with The Johns Hopkins University.
+
+
+
+queryDateTime:2016-06-16T05:47:04PDT
+
+
+
+Photometric Data for SDSS J141914.95+524929.5
+
+No.|Observed Passband|Photometry Measurement|Uncertainty|Units|Frequency|NED Photometry Measurement|NED Uncertainty|NED Units|Refcode|Significance|Published frequency|Frequency Mode|Coordinates Targeted|Spatial Mode|Qualifiers|Comments
+1|5-10 keV (Chandra)  ||<0.24E-15  |erg/cm^2^/s         |1.81E+18||1.33E-11|Jy|2009ApJS..180..102L|1 sigma|      7.50 keV       | Broad-band measurement|214.812307 +52.824915 (J2000)| Modelled datum|                                        |From new raw data; NED frequency assigned to mid-point ofband in keV
+2|2-10 keV (Chandra)  ||<3.82E-16  |erg/s/cm^2^         |1.45E+18||2.63E-11|Jy|2010MNRAS.403.1474S|3 sigma|      6.00 keV       | Broad-band measurement|| Modelled datum|                                        |Averaged from previously published data; NED frequencyassigned to mid-point of band in keV
+3|2-10 keV (Chandra)  ||<0.38E-15  |erg/cm^2^/s         |1.45E+18||2.62E-11|Jy|2009ApJS..180..102L|1 sigma|      6.00 keV       | Broad-band measurement|214.812307 +52.824915 (J2000)| Modelled datum|                                        |From new raw data; NED frequency assigned to mid-point ofband in keV
+4|0.5-10 keV (Chandra)| 0.51E-15  |+/-0.25E-15|erg/cm^2^/s         |1.27E+18|  4.02E-11|+/-1.97E-11|Jy|2009ApJS..180..102L|1 sigma|      5.25 keV       | Broad-band measurement|214.812307 +52.824915 (J2000)| Modelled datum|                                        |From new raw data; NED frequency assigned to mid-point ofband in keV
+5|0.5-2 keV (Chandra) | 0.16E-15  |+/-0.09E-15|erg/cm^2^/s         |3.02E+17|  5.30E-11|+/-2.98E-11|Jy|2009ApJS..180..102L|1 sigma|      1.25 keV       | Broad-band measurement|214.812307 +52.824915 (J2000)| Modelled datum|                                        |From new raw data; NED frequency assigned to mid-point ofband in keV
+6|0.5-2 keV (Chandra) | 1.59E-16  |+/-0.92E-16|erg/s/cm^2^         |3.02E+17|  5.26E-11|+/-3.05E-11|Jy|2010MNRAS.403.1474S|uncertainty|      1.25 keV       | Broad-band measurement|| Modelled datum|                                        |Averaged from previously published data; NED frequencyassigned to mid-point of band in keV
+7|[O II] (DEEP2)      | -19.54    ||log(W/m^2^)         |8.04E+14|  2.88E+06||Jy-Hz|2010MNRAS.403.1474S|no uncertainty reported|      3727 A         | Line measurement; flux integrated over line; lines measured in emission|| From fitting to map|                                        |From reprocessed raw data
+8|[Ne III] (DEEP2)    | -20.50    ||log(W/m^2^)         |7.75E+14|  3.16E+05||Jy-Hz|2010MNRAS.403.1474S|no uncertainty reported|      3869 A         | Line measurement; flux integrated over line; lines measured in emission|| From fitting to map|                                        |From reprocessed raw data
+9|K_s (Keck)          | 17.59     || mag                |1.39E+14|  5.71E-05||Jy|2007MNRAS.382..109T|no uncertainty reported|      2.15 microns   | Broad-band measurement|214.81236 +52.82496 (J2000)| Flux in fixed aperture|                                        |Averaged from previously published data
+10|3.6 microns (IRAC)  | 1.2360E+02|+/-1.1048E-01|microJy             |8.44E+13|  1.24E-04|+/-1.10E-07|Jy|2013SSTSLC4.2....0C|uncertainty|3.55       microns   | Broad-band measurement|| Flux in fixed aperture|5.8" aperture                           |From new raw data
+11|3.6 microns (IRAC)  | 1.1644E+02|+/-9.8697E-02|microJy             |8.44E+13|  1.16E-04|+/-9.87E-08|Jy|2013SSTSLC4.2....0C|uncertainty|3.55       microns   | Broad-band measurement|| Flux in fixed aperture|3.8" aperture                           |From new raw data
+12|4.5 microns (IRAC)  | 1.3043E+02|+/-1.6366E-01|microJy             |6.67E+13|  1.30E-04|+/-1.64E-07|Jy|2013SSTSLC4.2....0C|uncertainty|4.493      microns   | Broad-band measurement|| Flux in fixed aperture|5.8" aperture                           |From new raw data
+13|4.5 microns (IRAC)  | 1.2126E+02|+/-1.2628E-01|microJy             |6.67E+13|  1.21E-04|+/-1.26E-07|Jy|2013SSTSLC4.2....0C|uncertainty|4.493      microns   | Broad-band measurement|| Flux in fixed aperture|3.8" aperture                           |From new raw data
+14|5.8 microns (IRAC)  | 8.8958E+01|+/-4.6351E-01|microJy             |5.23E+13|  8.90E-05|+/-4.64E-07|Jy|2013SSTSLC4.2....0C|uncertainty|5.731      microns   | Broad-band measurement|| Flux in fixed aperture|3.8" aperture                           |From new raw data
+15|5.8 microns (IRAC)  | 9.4198E+01|+/-6.2076E-01|microJy             |5.23E+13|  9.42E-05|+/-6.21E-07|Jy|2013SSTSLC4.2....0C|uncertainty|5.731      microns   | Broad-band measurement|| Flux in fixed aperture|5.8" aperture                           |From new raw data
+16|8.0 microns (IRAC)  | 1.0955E+02|+/-7.5685E-01|microJy             |3.81E+13|  1.10E-04|+/-7.57E-07|Jy|2013SSTSLC4.2....0C|uncertainty|7.872      microns   | Broad-band measurement|| Flux in fixed aperture|5.8" aperture                           |From new raw data
+17|8.0 microns (IRAC)  | 1.1049E+02|+/-5.7363E-01|microJy             |3.81E+13|  1.10E-04|+/-5.74E-07|Jy|2013SSTSLC4.2....0C|uncertainty|7.872      microns   | Broad-band measurement|| Flux in fixed aperture|3.8" aperture                           |From new raw data
+17|8.0 microns (IRAC)  | 3.452495E+02|+/-2.644505E+00|microJy         |3.81E+13|  3.452495E-04|+/-2.644505E-06|Jy|2013SSTSLC4.2....0C|uncertainty|7.872      microns   | Broad-band measurement|| Flux in fixed aperture|3.8" aperture                           |From new raw data
+18|24 microns (MIPS)   | 7.5012E+02|+/-3.9668E+00|microJy             |1.27E+13|  7.50E-04|+/-3.97E-06|Jy|2013SSTSLC4.2....0C|uncertainty|23.68      microns   | Broad-band measurement|| Modelled datum|PSF fit                                 |From new raw data
+19|24 microns (MIPS)   | 6.8884E+02|+/-3.6890E+00|microJy             |1.27E+13|  6.89E-04|+/-3.69E-06|Jy|2013SSTSLC4.2....0C|uncertainty|23.68      microns   | Broad-band measurement|| Flux in fixed aperture|14.7" aperture                          |From new raw data
+19|24 microns (MIPS)   | 0.675464|+/-0.004549|mJy             |1.27E+13|  0.675464E-03|+/-0.004549E-03|Jy|2013SSTSLC4.2....0C|uncertainty|23.68      microns   | Broad-band measurement|| Flux in fixed aperture|14.7" aperture                          |From new raw data
+3|100 microns (PACS)   | 39.806       |+/-5.449  |mJy             |2.998e+12  |  39.806E-03 |+/-5.449E-03  |Jy|2.40e+01           |0.00e+00 |-9.90e+01 |-9.90e+01 |-9.90e+01 | NaN|
+4|160 microns (PACS)   | 85.791      |+/-4.459  |mJy             |1.874e+12  | 85.791E-03 |+/-4.459E-03  |Jy|2.40e+01           |0.00e+00 |-9.90e+01 |-9.90e+01 |-9.90e+01 | NaN|
+5|250 microns (SPIRE)  | 58.261      |+/-4.392  |mJy             |1.199e+12  |  58.261E-03|+/-4.392e-03  |Jy|2.40e+01           |0.00e+00 |-9.90e+01 |-9.90e+01 |-9.90e+01 | NaN|
+6|350 microns (SPIRE)  | 32.793      |+/-3.097  |mJy             |8.565e+11  |  32.793E-03|+/-3.097e-03  |Jy|2.40e+01           |0.00e+00 |-9.90e+01 |-9.90e+01 |-9.90e+01 | NaN|
+7|500 microns (SPIRE)  ||<1.0  |mJy             |5.996e+11  |  |1.0e-03  |Jy|2.40e+01           |3sigma |-9.90e+01 |-9.90e+01 |-9.90e+01 | NaN|
+20|CO(3-2) (PdBI)      ||<0.15      |Jy km/s             |3.46E+11|  1.94E+06|7.87E+04|Jy-Hz|2010Natur.463..781T|3 sigma|   345.998 GHz       | Line measurement; flux integrated over line; lines measured in emission|| Flux integrated from map|                                        |From new raw data
+
+Kaper         eKaper        CH4           eCH4            wCH4  CH3           eCH3            wCH3 CH2 eCH2 wCH2 CH1 eCH1 wCH1 Ks eKs wKs K eK wK H eH wH H2 eH2 wH2 H1 eH1 wH1 J eJ wJ J3 eJ3 wJ3 J2 eJ2 wJ2 J1 eJ1 wJ1 z ez wz I eI wI R eR wR G eG wG U eU wU NUV eNUV wNUV FUV eFUV wFUV ftot24um_uJy f24um_uJy e24um_uJy w24um wmin wmin_irac z_spec star_flag ap_col ap_tot totcor K_ellip K_theta_J2000 K_R50 K_class_star K_flags UH2_flags Near_Star CH1_contam CH2_contam CH3_contam CH4_contam NUV_contam FUV_contam contam_flag nchild id_parent use
+6.000194E+01  6.476347E-01  3.452495E+02  2.644505E+00    0.83  2.889004E+02  2.967744E+00    0.76  3.750043E+02  7.821244E-01    0.85  3.661992E+02  7.048357E-01    0.83  1.833519E+02  2.715018E+00    0.72  1.808029E+02  3.595558E+00    0.37  1.044920E+02  1.763505E+00    0.80  1.123540E+02  1.522979E+00    0.36  1.020758E+02  2.028325E+00    0.39  5.749457E+01  1.430997E+00    0.33  6.102102E+01  1.260939E+00    0.44  5.088481E+01  8.498213E-01    0.37  3.746237E+01  7.089743E-01    0.36  2.573423E+01  4.258092E-01    0.84  1.382426E+01  1.962204E-01    0.89  7.844111E+00  1.118566E-01    0.90  5.112001E+00  7.305582E-02    0.92  4.199111E+00  8.705379E-02    0.84  1.953114E+00  2.750579E+00    0.90 -9.900000E+01 -9.900000E+01    0.00  6.754643E+02  2.037939E+02  1.372584E+00    0.93    0.3257    0.7635  1.1970     0  1.50      5.87    1.0228    0.18  -10.82    1.00      0.97     0     0     0    0.001    0.001    0.002    0.000    0.041  -99.000     0   0    -1   1
