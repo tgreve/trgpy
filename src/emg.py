@@ -325,7 +325,8 @@ def extract_emg_csv(object_id='all', object_type='all', transition='all',
     """
 
     # Initialize data.
-    data = np.zeros((1000,), dtype=[('ID', list), ('type', list),
+    data = np.zeros((2000,), dtype=[('ID', list), ('type', list),
+                                    ('year', float),
                                     ('transition', list), ('z', float),
                                     ('ez', float), ('FWHM', float),
                                     ('eFWHM', float), ('SdV', float),
@@ -350,13 +351,16 @@ def extract_emg_csv(object_id='all', object_type='all', transition='all',
         if row[2] == '0' or row[2] == '1':
             data['ID'][i] = row[0].strip()
             data['include'][i] = row[2].strip()
+            data['year'][i] = row[3].strip()
             data['type'][i] = row[4].strip()
             data['transition'][i] = row[5].strip()
-            data['z'][i] = row[8]
-            data['ez'][i] = row[9]
+            data['z'][i] = row[8]   # Set z equal to Z_LINE
+            data['ez'][i] = row[9]  # Set ez equal to ERR_Z_LINE
+            # If Z_LINE is -999 set z equal to Z_OPT and ez equal to ERR_Z_OPT
             if row[8] == '-999':
                 data['z'][i] = row[6]
                 data['ez'][i] = row[7]
+            # If Z_OPT is -999 set z equal to Z_LINE and ez equal to ERR_Z_LINE
             if row[6] == '-999':
                 data['z'][i] = row[8]
                 data['ez'][i] = row[9]
@@ -551,10 +555,11 @@ def convert_file_to_csv(in_file, out_file=None):
         The default is to save the converted file as [in_file].csv, unless
         a specific out_file name is provided.
 
-        TODO:
-
         MODIFICATION HISTORY:
             29.07.2019: started
+            04.10.2019: works
+
+        TODO:
     """
 
     # Read in file
@@ -622,7 +627,7 @@ def convert_file_to_csv(in_file, out_file=None):
 
 
         # Trim df_out, remove duplicate entries, and save as .csv file.
-        df_out = df_out[0:N-1]
+        df_out = df_out[0:N]
         df_out = df_out.drop_duplicates(["ID","LINE","REF"])
         if out_file:
             df_out.to_csv(out_file, index=False)
@@ -639,8 +644,10 @@ def add_csv_to_emg(in_file, out_file=None):
         final csv is saved to that file name (out_file).
 
         -Reads in .csv file to be appended and master .csv file
-        -Checks for duplicate rows for ID, LINE, IDV, REF
+        -Checks for duplicate rows for ID, LINE, IDV, REF. Duplicates are not
+        appended.
         -Adds empty row for every 2nd row in input .csv
+        -Adds an empty row before appending new data
         -Finds overlap between input and master .csv files and drops
          overlap entries from input .csv.
         -Appends input .csv to master .csv
@@ -649,13 +656,19 @@ def add_csv_to_emg(in_file, out_file=None):
         MODIFICATION HISTORY:
             31.07.2019: started
             06.08.2019: basically works
+            04.10.2019: Fixed a few bugs. Now appends new csv file and removes
+                        duplicates. Empty lines are also removed.
+
+        TODO:
+        Find a way of adding empty lines after each source ID.
+        Strange rounding 'errors'
     """
 
     # Read in csv file to be appended
     try:
         df = pd.read_csv(in_file)
 
-        # Drop duplicate rows (ID .and. LINE .and. REF)
+        # Drop duplicate rows (ID .and. LINE .and. IDV .and. REF)
         df = df.drop_duplicates(["ID","LINE","IDV","REF"])
 
         # Add empty row after each entry
@@ -664,39 +677,40 @@ def add_csv_to_emg(in_file, out_file=None):
         grp = np.arange(len(df))
         df =  df.groupby(grp, group_keys=False).apply(f).reset_index(drop=True)
 
+
+        # Add row
+        df.loc[-1] = ["","","","","","","","", "","", "","","","","",
+                "","","","","", "", "","","","",""]
+        # Shifting index
+        df.index = df.index + 1
+        df.sort_index(inplace=True)
+
     except IOError:
         print("Error: File does not appear to exist.")
 
-
     # Read in master .csv file
+    master_csv_file = "/Users/tgreve/Dropbox/Work/EMGs/web/test-scripts/EMGs-test.csv"
     try:
-        df_master = pd.read_csv("/Users/tgreve/Dropbox/Work/EMGs/web/test-scripts/EMGs-test.csv", names=["ID",
+        df_master = pd.read_csv(master_csv_file, names=["ID",
             "ID_ALT","IO","YEAR","TYPE","LINE","Z_OPT","ERR_Z_OPT",
             "Z_LINE","ERR_Z_LINE", "FWHM","ERR_FWHM","IDV","ERR_IDV","MAG",
             "ERR_MAG","REF","COMMENTS","LIR_LIT","ERR_LIR_LIT", "MSTAR",
             "GOOD_FIT","LIR_CIGALE","LFIR_CIGALE","REF_URL","NED_URL"])
 
-        # Append an empty row at the end of dataframe
-        #df_master.append(pd.Series("", df_master.columns), ignore_index=True)
-
     except IOError:
         print("Error: File does not appear to exist.")
 
-
-
-    # Find overlapping entries and drop them from df
-    df_merge = pd.merge(df_master, df, on=["ID", "LINE", "REF"], how='inner')
-    df = df[~df["ID"].isin(df_merge["ID"])]
-
     # Append df to df_master --> df_final_master
     df_final_master = df_master.append(df, ignore_index = True)
+    # Remove duplicates in df_master. Also removes empty lines
+    df_final_master = df_final_master.drop_duplicates(["ID","LINE","REF"],
+            keep="last")
 
     # Save file
     if out_file:
         df_final_master.to_csv(out_file, index=False)
     else:
-        #df_final_master.to_csv(in_file[:-4]+".csv", index=False)
-        df_final_master.to_csv("gnyf.csv", index=False)
+        df_final_master.to_csv(master_csv_file, index=False)
 
 
 
