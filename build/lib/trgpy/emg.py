@@ -250,6 +250,7 @@ def line_flux_conversion(frq, sdv, conversion='jansky2si'):
         INPUT:
             frq:            :   approximate line center frequency [GHz].
             sdv             :   line flux [Jy km/s] or [W m^-2].
+            conversion      :   Determines which way the conversion goes.
 
         OUTPUT:
                             :   integrated line flux [Jy km/s] or [W m^-2].
@@ -446,7 +447,7 @@ def list_emg(data):
 
 #
 #
-def make_unique_emg_fluxes(data, transition):
+def make_unique_emg_fluxes(data):
     """
        Creates a unique list of emg entries
 
@@ -521,6 +522,22 @@ def delense_fluxes(data):
 
     return data
 
+#
+#
+def add_lum_line_to_data(data):
+    """Adds line luminosity and error to data.
+    08.05.2020
+    """
+
+    indices_ul =  [i for i,x in enumerate(data["eSdV"]) if x == 99]
+    indices_ud =  [i for i,x in enumerate(data["eSdV"]) if x == -999]
+
+    data["L_transition"] = line_lum(data["z"], data["SdV"], data["transition"])
+    data["eL_transition"] = line_lum(data["z"], data["eSdV"], data["transition"])
+    data["eL_transition"][indices_ul] = 99
+    data["eL_transition"][indices_ud] = -999
+
+    return data
 
 #
 #
@@ -543,6 +560,42 @@ def intersection_emg(data_1, data_2):
     data_2 = data_2[intersection_indices]
 
     return data_1, data_2
+
+#
+#
+def complimentary_emg(data_1, data_2):
+    """
+       Extracts the non-intersection between data_1 and data_2 and returns
+       the trimmed data_1 and data_2 structures containing the intersection
+       entries.
+
+    """
+
+    ids_1 = list(data_1['ID'])
+    ids_2 = list(data_2['ID'])
+    intersection_indices = [i for i, item in enumerate(ids_1) if item in ids_2]
+    data_1['ID'][intersection_indices] = 'REMOVE'
+    data_1 = data_1[data_1['ID'] != 'REMOVE']
+
+    ids_1 = list(data_1['ID'])
+    ids_2 = list(data_2['ID'])
+    intersection_indices = [i for i, item in enumerate(ids_2) if item in ids_1]
+    data_2['ID'][intersection_indices] = 'REMOVE'
+    data_2 = data_2[data_2['ID'] != 'REMOVE']
+
+    return data_1, data_2
+
+
+#
+#
+def dump_data_fields_to_csv(data, fields):
+    """Writes a csv file (out.csv) of the chosen fields in data.
+    """
+    mydata = data[fields]
+    out_file = open("out.csv", "w")
+    with out_file:
+        writer = csv.writer(out_file)
+        writer.writerows(mydata)
 
 
 #
@@ -603,7 +656,10 @@ def convert_file_to_csv(in_file, out_file=None):
             "COMMENTS": ["www.digame-db.online" for i in np.arange(0,N_out)],
             "LIR_LIT": [-999 for i in np.arange(0,N_out)],
             "ERR_LIR_LIT": [-999 for i in np.arange(0,N_out)],
+            "LFIR_LIT": [-999 for i in np.arange(0,N_out)],
+            "ERR_FLIR_LIT": [-999 for i in np.arange(0,N_out)],
             "MSTAR": [-999 for i in np.arange(0,N_out)],
+            "SFR": [-999 for i in np.arange(0,N_out)],
             "GOOD_FIT": ["" for i in np.arange(0,N_out)],
             "LIR_CIGALE": [-999 for i in np.arange(0,N_out)],
             "LFIR_CIGALE": [-999 for i in np.arange(0,N_out)],
@@ -613,8 +669,9 @@ def convert_file_to_csv(in_file, out_file=None):
         # Fill out df_out with df
         columns = ["ID","ID_ALT","IO","YEAR","TYPE","LINE","Z_OPT","ERR_Z_OPT",
             "Z_LINE","ERR_Z_LINE", "FWHM","ERR_FWHM","IDV","ERR_IDV","MAG",
-            "ERR_MAG","REF","COMMENTS","LIR_LIT","ERR_LIR_LIT", "MSTAR",
-            "GOOD_FIT","LIR_CIGALE","LFIR_CIGALE","REF_URL","NED_URL"]
+            "ERR_MAG","REF","COMMENTS","LIR_LIT","ERR_LIR_LIT", "LFIR_LIT",
+            "ERR_LFIR_LIT", "MSTAR","SFR", "GOOD_FIT","LIR_CIGALE",
+            "LFIR_CIGALE","REF_URL","NED_URL"]
 
         for clmn in columns:
             if clmn in df.columns:
@@ -680,7 +737,7 @@ def add_csv_to_emg(in_file, out_file=None):
 
         # Add row
         df.loc[-1] = ["","","","","","","","", "","", "","","","","",
-                "","","","","", "", "","","","",""]
+                "","","","","", "", "","","","","","","",""]
         # Shifting index
         df.index = df.index + 1
         df.sort_index(inplace=True)
@@ -694,8 +751,9 @@ def add_csv_to_emg(in_file, out_file=None):
         df_master = pd.read_csv(master_csv_file, names=["ID",
             "ID_ALT","IO","YEAR","TYPE","LINE","Z_OPT","ERR_Z_OPT",
             "Z_LINE","ERR_Z_LINE", "FWHM","ERR_FWHM","IDV","ERR_IDV","MAG",
-            "ERR_MAG","REF","COMMENTS","LIR_LIT","ERR_LIR_LIT", "MSTAR",
-            "GOOD_FIT","LIR_CIGALE","LFIR_CIGALE","REF_URL","NED_URL"])
+            "ERR_MAG","REF","COMMENTS","LIR_LIT","ERR_LIR_LIT", "LFIR_LIT",
+            "ERR_LFIR_LIT", "MSTAR","SFR", "GOOD_FIT","LIR_CIGALE",
+            "LFIR_CIGALE","REF_URL","NED_URL"])
 
     except IOError:
         print("Error: File does not appear to exist.")
