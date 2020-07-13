@@ -5,9 +5,9 @@ from astropy import units as u
 
 import pandas as pd
 
-from trgpy.config import cosmo_params
+from trgpy.config import cosmo_params_standard_1
 from trgpy.dictionary_transitions import freq
-
+cosmo_params = cosmo_params_standard_1
 
 
 # === Routines related to line fluxes and luminosities =======================
@@ -49,6 +49,7 @@ def line_lum(z, sdv, transition, units='prime'):
     # Get luminosity distance, [Mpc]
     cosmo = FlatLambdaCDM(H0=100.*cosmo_params['h'],
             Om0=cosmo_params['omega_M_0'], Tcmb0=cosmo_params['Tcmb0'])
+    print(z)
     d_L = cosmo.luminosity_distance(z)
     d_L = d_L.value
 
@@ -302,6 +303,112 @@ def line_flux_conversion(frq, sdv, conversion='jansky2si'):
 
 
 # === Routines related to emg data base ======================================
+
+
+#
+#
+def extract_digame_csv(object_id='all', object_type='all', transition='all',
+                    reference='all', verbose=False):
+    """ PURPOSE:
+            Extract data entries from digame.csv file according to the object_id,
+            object_type and transition criteria.
+
+        INPUT:
+                object_id   :   specific object id to extract.
+                                Default 'all'.
+                object_type :   specific object type to extract.
+                                Default 'all'
+                transition  :   transition to extract.
+                                Default 'all'
+    """
+
+    # Initialize data.
+    data = np.zeros((10000,), dtype=[('ID', list), ('type', list),
+                                    ('year', float),
+                                    ('transition', list), ('z', float),
+                                    ('ez', float), ('FWHM', float),
+                                    ('eFWHM', float), ('SdV', float),
+                                    ('eSdV', float), ('L_transition', float),
+                                    ('eL_transition', float),
+                                    ('magnification', float),
+                                    ('reference_url', list),
+                                    ('NED_url', list),
+                                    ('err_magnification', list),
+                                    ('lir_8_1000_literature', float),
+                                    ('elir_8_1000_literature', float),
+                                    ('lir_8_1000_cigale', float),
+                                    ('elir_8_1000_cigale', float),
+                                    ('lir_40_120_cigale', float),
+                                    ('elir_40_120_cigale', float)])
+
+    #['CGCG052-037', 'ULIRG', 'HNC(1-0)', '0.02', '-999.0', '-999.0', '-999.0'  , '3.9', '0.53'    , '0.0'                  ,'0.0'                         ,'1.0', '1'    , 'Privon et al. (2015)', 'https://arxiv.org/pdf/1509.07512.pdf', ''      , '0.0', '0.0', '0.0', '0.0', '0.0', '0.0']
+    #ID            , Type   , Transition, z     , error z ,  FWHM   , error FWHM, SdV  , error  SdV, Luminosity not selected,error  luminosity not selected,u    , error u, reference             , reference link                        , NED link,      ,      ,      ,      ,      ,
+
+    # Open csv file.
+    i = 0
+    cr = csv.reader(open("/Users/tgreve/Dropbox/Work/local/python/trgpy/src/digame_export.csv"))
+    for row in cr:
+        data['ID'][i] = row[0].strip()
+
+    #    if row[2] == '0' or row[2] == '1':
+    #    #if row[2] != "NAN":
+    #        data['ID'][i] = row[0].strip()
+    #        data['include'][i] = row[2].strip()
+    #        data['year'][i] = row[3].strip()
+    #        data['type'][i] = row[4].strip()
+    #        data['transition'][i] = row[5].strip()
+    #        data['z'][i] = row[8]   # Set z equal to Z_LINE
+    #        data['ez'][i] = row[9]  # Set ez equal to ERR_Z_LINE
+    #        # If Z_LINE is -999 set z equal to Z_OPT and ez equal to ERR_Z_OPT
+    #        if row[8] == '-999':
+    #            data['z'][i] = row[6]
+    #            data['ez'][i] = row[7]
+    #        # If Z_OPT is -999 set z equal to Z_LINE and ez equal to ERR_Z_LINE
+    #        if row[6] == '-999':
+    #            data['z'][i] = row[8]
+    #            data['ez'][i] = row[9]
+    #        data['FWHM'][i] = row[10]
+    #        data['eFWHM'][i] = row[11]
+    #        data['SdV'][i] = row[12]
+    #        data['eSdV'][i] = row[13]
+    #        data['magnification'][i] = row[14]
+    #        data['reference'][i] = row[16]
+    #        data['reference_url'][i] = row[24]
+    #        data['NED_url'][i] = row[25]
+    #        data['err_magnification'][i] = row[15]
+    #        if row[18] != '':
+    #            data['lir_8_1000_literature'][i] = float(row[18])
+    #        if row[19] != '':
+    #            data['elir_8_1000_literature'][i] = float(row[19])
+    #        if row[22] != '':
+    #            data['lir_8_1000_cigale'][i] = float(row[22])
+    #            data['elir_8_1000_cigale'][i] = 0.2*float(row[22])
+    #        if row[23] != '':
+    #            data['lir_40_120_cigale'][i] = float(row[23])
+    #            data['elir_40_120_cigale'][i] = 0.2*float(row[23])
+    #        i = i + 1
+    #data = data[0:i]
+
+    ## Extract according to input criteria.
+    #if object_id != 'all':
+    #    data = data[data['ID'] == object_id]
+    #if object_type != 'all':
+    #    data = data[data['type'] == object_type]
+    #if transition != 'all':
+    #    data = data[data['transition'] == transition]
+    #if reference != 'all':
+    #    data = data[data['reference'] == reference]
+    #if flag_include:
+    #    data = data[data['include'] == '1']
+
+    ## Remove empty ID strings
+    #data = data[data['ID'] != '']
+
+    #if verbose:
+    #    list_emg(data)
+
+    return data
+
 #
 #
 def extract_emg_csv(object_id='all', object_type='all', transition='all',
@@ -326,7 +433,7 @@ def extract_emg_csv(object_id='all', object_type='all', transition='all',
     """
 
     # Initialize data.
-    data = np.zeros((2000,), dtype=[('ID', list), ('type', list),
+    data = np.zeros((10000,), dtype=[('ID', list), ('type', list),
                                     ('year', float),
                                     ('transition', list), ('z', float),
                                     ('ez', float), ('FWHM', float),
@@ -345,11 +452,15 @@ def extract_emg_csv(object_id='all', object_type='all', transition='all',
                                     ('lir_40_120_cigale', float),
                                     ('elir_40_120_cigale', float)])
 
+
+
     # Open csv file.
     i = 0
     cr = csv.reader(open("/Users/tgreve/Dropbox/Work/local/python/trgpy/src/EMGs-v1.3.csv"))
+    #cr = csv.reader(open("/Users/tgreve/Dropbox/Work/local/python/trgpy/src/digame_export.csv"))
     for row in cr:
         if row[2] == '0' or row[2] == '1':
+        #if row[2] != "NAN":
             data['ID'][i] = row[0].strip()
             data['include'][i] = row[2].strip()
             data['year'][i] = row[3].strip()
