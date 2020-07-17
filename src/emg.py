@@ -49,7 +49,6 @@ def line_lum(z, sdv, transition, units='prime'):
     # Get luminosity distance, [Mpc]
     cosmo = FlatLambdaCDM(H0=100.*cosmo_params['h'],
             Om0=cosmo_params['omega_M_0'], Tcmb0=cosmo_params['Tcmb0'])
-    print(z)
     d_L = cosmo.luminosity_distance(z)
     d_L = d_L.value
 
@@ -331,6 +330,7 @@ def extract_digame_csv(object_id='all', object_type='all', transition='all',
                                     ('eSdV', float), ('L_transition', float),
                                     ('eL_transition', float),
                                     ('magnification', float),
+                                    ('reference', list),
                                     ('reference_url', list),
                                     ('NED_url', list),
                                     ('err_magnification', list),
@@ -347,18 +347,27 @@ def extract_digame_csv(object_id='all', object_type='all', transition='all',
     # Open csv file.
     i = 0
     cr = csv.reader(open("/Users/tgreve/Dropbox/Work/local/python/trgpy/src/digame_export.csv"))
+    next(cr)
     for row in cr:
         data['ID'][i] = row[0].strip()
+        data['type'][i] = row[1].strip()
+        data['transition'][i] = row[2].strip()
+        data['z'][i] = row[3]   # Set z equal to Z_LINE
+        data['ez'][i] = row[4]  # Set ez equal to ERR_Z_LINE
+        data['FWHM'][i] = row[5]
+        data['eFWHM'][i] = row[6]
+        data['SdV'][i] = row[7]
+        data['eSdV'][i] = row[8]
+        data['magnification'][i] = row[11]
+        data['err_magnification'][i] = row[12]
+        data['reference'][i] = row[13]
+        i = i + 1
+    data = data[0:i]
 
-    #    if row[2] == '0' or row[2] == '1':
     #    #if row[2] != "NAN":
     #        data['ID'][i] = row[0].strip()
     #        data['include'][i] = row[2].strip()
     #        data['year'][i] = row[3].strip()
-    #        data['type'][i] = row[4].strip()
-    #        data['transition'][i] = row[5].strip()
-    #        data['z'][i] = row[8]   # Set z equal to Z_LINE
-    #        data['ez'][i] = row[9]  # Set ez equal to ERR_Z_LINE
     #        # If Z_LINE is -999 set z equal to Z_OPT and ez equal to ERR_Z_OPT
     #        if row[8] == '-999':
     #            data['z'][i] = row[6]
@@ -367,15 +376,8 @@ def extract_digame_csv(object_id='all', object_type='all', transition='all',
     #        if row[6] == '-999':
     #            data['z'][i] = row[8]
     #            data['ez'][i] = row[9]
-    #        data['FWHM'][i] = row[10]
-    #        data['eFWHM'][i] = row[11]
-    #        data['SdV'][i] = row[12]
-    #        data['eSdV'][i] = row[13]
-    #        data['magnification'][i] = row[14]
-    #        data['reference'][i] = row[16]
     #        data['reference_url'][i] = row[24]
     #        data['NED_url'][i] = row[25]
-    #        data['err_magnification'][i] = row[15]
     #        if row[18] != '':
     #            data['lir_8_1000_literature'][i] = float(row[18])
     #        if row[19] != '':
@@ -386,26 +388,22 @@ def extract_digame_csv(object_id='all', object_type='all', transition='all',
     #        if row[23] != '':
     #            data['lir_40_120_cigale'][i] = float(row[23])
     #            data['elir_40_120_cigale'][i] = 0.2*float(row[23])
-    #        i = i + 1
-    #data = data[0:i]
 
-    ## Extract according to input criteria.
-    #if object_id != 'all':
-    #    data = data[data['ID'] == object_id]
-    #if object_type != 'all':
-    #    data = data[data['type'] == object_type]
-    #if transition != 'all':
-    #    data = data[data['transition'] == transition]
-    #if reference != 'all':
-    #    data = data[data['reference'] == reference]
-    #if flag_include:
-    #    data = data[data['include'] == '1']
+    # Extract according to input criteria.
+    if object_id != 'all':
+        data = data[data['ID'] == object_id]
+    if object_type != 'all':
+        data = data[data['type'] == object_type]
+    if transition != 'all':
+        data = data[data['transition'] == transition]
+    if reference != 'all':
+        data = data[data['reference'] == reference]
 
-    ## Remove empty ID strings
-    #data = data[data['ID'] != '']
+    # Remove empty ID strings
+    data = data[data['ID'] != '']
 
-    #if verbose:
-    #    list_emg(data)
+    if verbose:
+        list_emg(data)
 
     return data
 
