@@ -307,7 +307,7 @@ def line_flux_conversion(frq, sdv, conversion='jansky2si'):
 #
 #
 def extract_digame_csv(object_id='all', object_type='all', transition='all',
-                    reference='all', verbose=False):
+                    reference='all', zmin=0., zmax=20., verbose=False):
     """ PURPOSE:
             Extract data entries from digame.csv file according to the object_id,
             object_type and transition criteria.
@@ -352,15 +352,15 @@ def extract_digame_csv(object_id='all', object_type='all', transition='all',
         data['ID'][i] = row[0].strip()
         data['type'][i] = row[1].strip()
         data['transition'][i] = row[2].strip()
-        data['z'][i] = row[3]   # Set z equal to Z_LINE
-        data['ez'][i] = row[4]  # Set ez equal to ERR_Z_LINE
+        data['z'][i] = row[3]
+        data['ez'][i] = row[4]
         data['FWHM'][i] = row[5]
         data['eFWHM'][i] = row[6]
         data['SdV'][i] = row[7]
         data['eSdV'][i] = row[8]
         data['magnification'][i] = row[11]
         data['err_magnification'][i] = row[12]
-        data['reference'][i] = row[13]
+        data['reference'][i] = row[13].strip()
         i = i + 1
     data = data[0:i]
 
@@ -402,6 +402,11 @@ def extract_digame_csv(object_id='all', object_type='all', transition='all',
     # Remove empty ID strings
     data = data[data['ID'] != '']
 
+    # Select sources within zmin:zmax
+    data = data[data['z'] > zmin]
+    data = data[data['z'] < zmax]
+
+    # Output data?
     if verbose:
         list_emg(data)
 
@@ -586,7 +591,10 @@ def make_unique_emg_fluxes(data):
             x_wa = np.average(x, weights = 1./ex**2)
             ex_wa = np.sqrt(1./sum(1./ex**2))
             data['SdV'][indices[0]] = x_wa
-            data['eSdV'][indices[0]] = ex_wa
+            if 99 in ex:
+                data['eSdV'][indices[0]] = 99
+            else:
+                data['eSdV'][indices[0]] = ex_wa
             data['ID'][indices[1:]] = ['REMOVE']*(len(indices) - 1)
 
             x = data['FWHM'][indices]
@@ -667,6 +675,11 @@ def intersection_emg(data_1, data_2):
     ids_2 = list(data_2['ID'])
     intersection_indices = [i for i, item in enumerate(ids_2) if item in ids_1]
     data_2 = data_2[intersection_indices]
+
+    sort_indices = np.argsort(data_2["ID"])
+    data_2 = data_2[sort_indices]
+    sort_indices = np.argsort(data_1["ID"])
+    data_1 = data_1[sort_indices]
 
     return data_1, data_2
 
@@ -883,7 +896,18 @@ def add_csv_to_emg(in_file, out_file=None):
 
 #
 #
-#def _extract_single_entry_from_emg(data):
+def zap_emg_entry(data, source_id, transition, sdv, reference):
+    """ Removes a single entry from data based on input source_id, transition,
+    sdv, and reference.
+    """
+
+    indices_remove = [i for i,x in enumerate(data) if data["ID"][i] == source_id
+            and data["SdV"][i] == sdv and data["transition"][i] == transition
+            and data["reference"][i] == reference]
+    data = np.delete(data, indices_remove)
+
+    return data
+
 
 ##
 ##

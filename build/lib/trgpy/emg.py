@@ -49,7 +49,6 @@ def line_lum(z, sdv, transition, units='prime'):
     # Get luminosity distance, [Mpc]
     cosmo = FlatLambdaCDM(H0=100.*cosmo_params['h'],
             Om0=cosmo_params['omega_M_0'], Tcmb0=cosmo_params['Tcmb0'])
-    print(z)
     d_L = cosmo.luminosity_distance(z)
     d_L = d_L.value
 
@@ -308,7 +307,7 @@ def line_flux_conversion(frq, sdv, conversion='jansky2si'):
 #
 #
 def extract_digame_csv(object_id='all', object_type='all', transition='all',
-                    reference='all', verbose=False):
+                    reference='all', zmin=0., zmax=20., verbose=False):
     """ PURPOSE:
             Extract data entries from digame.csv file according to the object_id,
             object_type and transition criteria.
@@ -331,6 +330,7 @@ def extract_digame_csv(object_id='all', object_type='all', transition='all',
                                     ('eSdV', float), ('L_transition', float),
                                     ('eL_transition', float),
                                     ('magnification', float),
+                                    ('reference', list),
                                     ('reference_url', list),
                                     ('NED_url', list),
                                     ('err_magnification', list),
@@ -347,18 +347,27 @@ def extract_digame_csv(object_id='all', object_type='all', transition='all',
     # Open csv file.
     i = 0
     cr = csv.reader(open("/Users/tgreve/Dropbox/Work/local/python/trgpy/src/digame_export.csv"))
+    next(cr)
     for row in cr:
         data['ID'][i] = row[0].strip()
+        data['type'][i] = row[1].strip()
+        data['transition'][i] = row[2].strip()
+        data['z'][i] = row[3]
+        data['ez'][i] = row[4]
+        data['FWHM'][i] = row[5]
+        data['eFWHM'][i] = row[6]
+        data['SdV'][i] = row[7]
+        data['eSdV'][i] = row[8]
+        data['magnification'][i] = row[11]
+        data['err_magnification'][i] = row[12]
+        data['reference'][i] = row[13].strip()
+        i = i + 1
+    data = data[0:i]
 
-    #    if row[2] == '0' or row[2] == '1':
     #    #if row[2] != "NAN":
     #        data['ID'][i] = row[0].strip()
     #        data['include'][i] = row[2].strip()
     #        data['year'][i] = row[3].strip()
-    #        data['type'][i] = row[4].strip()
-    #        data['transition'][i] = row[5].strip()
-    #        data['z'][i] = row[8]   # Set z equal to Z_LINE
-    #        data['ez'][i] = row[9]  # Set ez equal to ERR_Z_LINE
     #        # If Z_LINE is -999 set z equal to Z_OPT and ez equal to ERR_Z_OPT
     #        if row[8] == '-999':
     #            data['z'][i] = row[6]
@@ -367,15 +376,8 @@ def extract_digame_csv(object_id='all', object_type='all', transition='all',
     #        if row[6] == '-999':
     #            data['z'][i] = row[8]
     #            data['ez'][i] = row[9]
-    #        data['FWHM'][i] = row[10]
-    #        data['eFWHM'][i] = row[11]
-    #        data['SdV'][i] = row[12]
-    #        data['eSdV'][i] = row[13]
-    #        data['magnification'][i] = row[14]
-    #        data['reference'][i] = row[16]
     #        data['reference_url'][i] = row[24]
     #        data['NED_url'][i] = row[25]
-    #        data['err_magnification'][i] = row[15]
     #        if row[18] != '':
     #            data['lir_8_1000_literature'][i] = float(row[18])
     #        if row[19] != '':
@@ -386,26 +388,27 @@ def extract_digame_csv(object_id='all', object_type='all', transition='all',
     #        if row[23] != '':
     #            data['lir_40_120_cigale'][i] = float(row[23])
     #            data['elir_40_120_cigale'][i] = 0.2*float(row[23])
-    #        i = i + 1
-    #data = data[0:i]
 
-    ## Extract according to input criteria.
-    #if object_id != 'all':
-    #    data = data[data['ID'] == object_id]
-    #if object_type != 'all':
-    #    data = data[data['type'] == object_type]
-    #if transition != 'all':
-    #    data = data[data['transition'] == transition]
-    #if reference != 'all':
-    #    data = data[data['reference'] == reference]
-    #if flag_include:
-    #    data = data[data['include'] == '1']
+    # Extract according to input criteria.
+    if object_id != 'all':
+        data = data[data['ID'] == object_id]
+    if object_type != 'all':
+        data = data[data['type'] == object_type]
+    if transition != 'all':
+        data = data[data['transition'] == transition]
+    if reference != 'all':
+        data = data[data['reference'] == reference]
 
-    ## Remove empty ID strings
-    #data = data[data['ID'] != '']
+    # Remove empty ID strings
+    data = data[data['ID'] != '']
 
-    #if verbose:
-    #    list_emg(data)
+    # Select sources within zmin:zmax
+    data = data[data['z'] > zmin]
+    data = data[data['z'] < zmax]
+
+    # Output data?
+    if verbose:
+        list_emg(data)
 
     return data
 
@@ -588,7 +591,10 @@ def make_unique_emg_fluxes(data):
             x_wa = np.average(x, weights = 1./ex**2)
             ex_wa = np.sqrt(1./sum(1./ex**2))
             data['SdV'][indices[0]] = x_wa
-            data['eSdV'][indices[0]] = ex_wa
+            if 99 in ex:
+                data['eSdV'][indices[0]] = 99
+            else:
+                data['eSdV'][indices[0]] = ex_wa
             data['ID'][indices[1:]] = ['REMOVE']*(len(indices) - 1)
 
             x = data['FWHM'][indices]
@@ -669,6 +675,11 @@ def intersection_emg(data_1, data_2):
     ids_2 = list(data_2['ID'])
     intersection_indices = [i for i, item in enumerate(ids_2) if item in ids_1]
     data_2 = data_2[intersection_indices]
+
+    sort_indices = np.argsort(data_2["ID"])
+    data_2 = data_2[sort_indices]
+    sort_indices = np.argsort(data_1["ID"])
+    data_1 = data_1[sort_indices]
 
     return data_1, data_2
 
@@ -885,7 +896,18 @@ def add_csv_to_emg(in_file, out_file=None):
 
 #
 #
-#def _extract_single_entry_from_emg(data):
+def zap_emg_entry(data, source_id, transition, sdv, reference):
+    """ Removes a single entry from data based on input source_id, transition,
+    sdv, and reference.
+    """
+
+    indices_remove = [i for i,x in enumerate(data) if data["ID"][i] == source_id
+            and data["SdV"][i] == sdv and data["transition"][i] == transition
+            and data["reference"][i] == reference]
+    data = np.delete(data, indices_remove)
+
+    return data
+
 
 ##
 ##
