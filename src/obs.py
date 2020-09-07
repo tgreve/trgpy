@@ -205,6 +205,9 @@ def frequency_vs_redshift(transitions=['12CO(1-0)'], observatory='JCMT',
     elif observatory == 'ALMA':
         print("ALMA")
         rx=band['ALMA']
+    elif observatory == 'GBT':
+        print("GBT")
+        rx=band['GBT']
     elif observatory == 'IRAM NOEMA':
         #print('{0:>59}'.format('IRAM NOEMA'))
         print('IRAM NOEMA')
@@ -212,7 +215,7 @@ def frequency_vs_redshift(transitions=['12CO(1-0)'], observatory='JCMT',
     elif observatory == 'IRAM 30m':
         #print('{0:>81}'.format('IRAM 30m (EMIR)'))
         print('IRAM 30m (EMIR)')
-        rx=band['IRAM-30m']
+        rx=band["IRAM-30m"]
     elif observatory == 'JCMT':
         #print('{0:>41}'.format('JCMT'))
         print('JCMT')

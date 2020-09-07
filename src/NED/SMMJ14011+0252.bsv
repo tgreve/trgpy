@@ -10,7 +10,7 @@ under cooperative agreement AST0122449 with The Johns Hopkins University.
 
 queryDateTime:2013-02-19T12:09:07PST
 
-
+z=2.56530
 
 Photometric Data for SMM J140104.96+025223.5
 

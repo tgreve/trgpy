@@ -10,7 +10,7 @@ under cooperative agreement AST0122449 with The Johns Hopkins University.
 
 queryDateTime:2017-01-17T08:25:23PST
 
-
+z=2.3259
 
 Photometric Data for Cosmic Eyelash
 

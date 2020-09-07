@@ -10,6 +10,14 @@ from trgpy.dictionary_transitions import freq
 cosmo_params = cosmo_params_standard_1
 
 
+
+# === Global variables =======================================================
+UnDefVal = -999
+ULVal = 99
+# ============================================================================
+
+
+
 # === Routines related to line fluxes and luminosities =======================
 #
 #
@@ -333,13 +341,16 @@ def extract_digame_csv(object_id='all', object_type='all', transition='all',
                                     ('reference', list),
                                     ('reference_url', list),
                                     ('NED_url', list),
-                                    ('err_magnification', list),
+                                    ('err_magnification', float),
                                     ('lir_8_1000_literature', float),
                                     ('elir_8_1000_literature', float),
                                     ('lir_8_1000_cigale', float),
                                     ('elir_8_1000_cigale', float),
                                     ('lir_40_120_cigale', float),
-                                    ('elir_40_120_cigale', float)])
+                                    ('elir_40_120_cigale', float),
+                                    ('lir_8_1000', float),
+                                    ('elir_8_1000', float),
+                                    ])
 
     #['CGCG052-037', 'ULIRG', 'HNC(1-0)', '0.02', '-999.0', '-999.0', '-999.0'  , '3.9', '0.53'    , '0.0'                  ,'0.0'                         ,'1.0', '1'    , 'Privon et al. (2015)', 'https://arxiv.org/pdf/1509.07512.pdf', ''      , '0.0', '0.0', '0.0', '0.0', '0.0', '0.0']
     #ID            , Type   , Transition, z     , error z ,  FWHM   , error FWHM, SdV  , error  SdV, Luminosity not selected,error  luminosity not selected,u    , error u, reference             , reference link                        , NED link,      ,      ,      ,      ,      ,
@@ -453,7 +464,18 @@ def extract_emg_csv(object_id='all', object_type='all', transition='all',
                                     ('lir_8_1000_cigale', float),
                                     ('elir_8_1000_cigale', float),
                                     ('lir_40_120_cigale', float),
-                                    ('elir_40_120_cigale', float)])
+                                    ('elir_40_120_cigale', float),
+                                    ('lir_8_1000', float),
+                                    ('elir_8_1000', float),
+                                    ('L_transition_solar', float),
+                                    ('eL_transition_solar', float),
+                                    ('L_transition_solar_delensed', float),
+                                    ('eL_transition_solar_delensed', float),
+                                    ('L_transition_delensed', float),
+                                    ('eL_transition_delensed', float)
+                                    ])
+
+    #ID,ID_ALT,IO,YEAR,TYPE,LINE,Z_OPT,ERR_Z_OPT,Z_LINE,ERR_Z_LINE,FWHM,ERR_FWHM,IDV,ERR_IDV,MAG,ERR_MAG,REF,COMMENTS,LIR_LIT,ERR_LIR_LIT,MSTAR,GOOD_FIT,LIR_CIGALE,LFIR_CIGALE,REF_URL,NED_URL
 
 
 
@@ -472,11 +494,11 @@ def extract_emg_csv(object_id='all', object_type='all', transition='all',
             data['z'][i] = row[8]   # Set z equal to Z_LINE
             data['ez'][i] = row[9]  # Set ez equal to ERR_Z_LINE
             # If Z_LINE is -999 set z equal to Z_OPT and ez equal to ERR_Z_OPT
-            if row[8] == '-999':
+            if "-999" in row[8]:
                 data['z'][i] = row[6]
                 data['ez'][i] = row[7]
             # If Z_OPT is -999 set z equal to Z_LINE and ez equal to ERR_Z_LINE
-            if row[6] == '-999':
+            if "-999" in row[6]:
                 data['z'][i] = row[8]
                 data['ez'][i] = row[9]
             data['FWHM'][i] = row[10]
@@ -487,15 +509,19 @@ def extract_emg_csv(object_id='all', object_type='all', transition='all',
             data['reference'][i] = row[16]
             data['reference_url'][i] = row[24]
             data['NED_url'][i] = row[25]
-            data['err_magnification'][i] = row[15]
-            if row[18] != '':
+            data['err_magnification'][i] = float(row[15])
+            if row[18] != '' and row[18] != '-999':
                 data['lir_8_1000_literature'][i] = float(row[18])
-            if row[19] != '':
+                data['lir_8_1000'][i] = float(row[18])
+            if row[19] != '' and row[19] != '-999':
                 data['elir_8_1000_literature'][i] = float(row[19])
-            if row[22] != '':
+                data['elir_8_1000'][i] = 0.2*float(row[19])
+            if row[22] != '' and row[22] != '-999':
                 data['lir_8_1000_cigale'][i] = float(row[22])
                 data['elir_8_1000_cigale'][i] = 0.2*float(row[22])
-            if row[23] != '':
+                data['lir_8_1000'][i] = float(row[22])
+                data['elir_8_1000'][i] = 0.2*float(row[22])
+            if row[23] != '' and row[23] != '-999':
                 data['lir_40_120_cigale'][i] = float(row[23])
                 data['elir_40_120_cigale'][i] = 0.2*float(row[23])
             i = i + 1
@@ -559,6 +585,53 @@ def list_emg(data):
                      data['L_transition'][j], data['eL_transition'][j]))
         j = j + 1
 
+
+
+#
+#
+def _get_average_emg_entry(x, ex):
+    """ Returns weighted average and error, while accounting for upper limits
+    and undefined values.
+    """
+
+    x_wa = 0
+    ex_wa = 0
+    # Extract only multiple values that are defined
+    indices_valid = [i for i,val in enumerate(x) if val != UnDefVal]
+    x = x[indices_valid]
+    ex = ex[indices_valid]
+
+    if len(indices_valid) != 0:
+        # Find upper limits if any
+        indices_ul = [i for i,val in enumerate(ex) if val == ULVal]
+        indices_non_ul = [i for i,val in enumerate(ex) if val != ULVal]
+
+        # There are upper limits
+        if len(indices_ul) != 0:
+            # But there are also non-ULs, and we adopt those.
+            if len(indices_non_ul) == 1:
+                x_wa = x[indices_non_ul]
+                ex_wa = ex[indices_non_ul]
+            elif len(indices_non_ul) > 1:
+                x = x[indices_non_ul]
+                ex = ex[indices_non_ul]
+                x_wa = np.average(x, weights = 1./ex**2)
+                ex_wa = np.sqrt(1./sum(1./ex**2))
+            else:
+                x_wa = np.average(x, weights = 1./ex**2)
+                ex_wa = ULVal
+
+        else:
+            x_wa = np.average(x, weights = 1./ex**2)
+            ex_wa = np.sqrt(1./sum(1./ex**2))
+    else:
+        x_wa = UnDefVal
+        ex_wa = UnDefVal
+
+    return x_wa, ex_wa
+
+
+
 #
 #
 def make_unique_emg_fluxes(data):
@@ -568,52 +641,111 @@ def make_unique_emg_fluxes(data):
        Fix multiple occurrences of certain sources by replacing
        with (weighted) averages (for flux, line fwhm, redhift, etc).
        Fix instances of z=-999, u=-999 etc
+
+       22.08.2020: bug fixed and major update.
     """
 
-    # Set undefined magnification factors (u=-999) unity.
-    indices = [i for i, item in enumerate(
-               data['magnification']) if item == -999]
-    if indices != []:
-        for j in indices:
-            data['magnification'][j] = 1.0
 
-    # Extract unique list of transitions.
-    trans = list(set(data['transition']))
-    ids = list(set(data['ID']))
+    # Get unique source list
+    sources = np.unique(data["ID"])
+    # Get unique transition list
+    transitions = np.unique(data["transition"])
 
-    for var in trans:
-        for var1 in ids:
-            indices = [i for i, item in enumerate(
-                       data['ID']) if item == var1]
+    for s in sources:
+        for t in transitions:
+            indices_multiple = [i for i,_ in enumerate(data) if data["ID"][i] == s and data["transition"][i] == t]
+            if len(indices_multiple) > 1:
 
-            x = data['SdV'][indices]
-            ex = data['eSdV'][indices]
-            x_wa = np.average(x, weights = 1./ex**2)
-            ex_wa = np.sqrt(1./sum(1./ex**2))
-            data['SdV'][indices[0]] = x_wa
-            if 99 in ex:
-                data['eSdV'][indices[0]] = 99
-            else:
-                data['eSdV'][indices[0]] = ex_wa
-            data['ID'][indices[1:]] = ['REMOVE']*(len(indices) - 1)
+                # Extract and Average: SdV and eSdV
+                x = data['SdV'][indices_multiple]
+                ex = data['eSdV'][indices_multiple]
+                x_wa, ex_wa = _get_average_emg_entry(x, ex)
 
-            x = data['FWHM'][indices]
-            ex = data['eFWHM'][indices]
-            x_wa = np.average(x, weights = 1./ex**2)
-            ex_wa = np.sqrt(1. / sum(1. / ex**2))
-            data['FWHM'][indices[0]] = x_wa
-            data['eFWHM'][indices[0]] = ex_wa
+                data['SdV'][indices_multiple[0]] = x_wa
+                data['eSdV'][indices_multiple[0]] = ex_wa
+                data['ID'][indices_multiple[1:]] = ['REMOVE']*(len(indices_multiple) - 1)
 
-            x = data['z'][indices]
-            ex = data['ez'][indices]
-            x_wa = np.average(x, weights = 1./ex**2)
-            ex_wa = np.sqrt(1./sum(1./ex**2))
-            data['z'][indices[0]] = x_wa
-            data['ez'][indices[0]] = ex_wa
+
+                # Extract and Average: FWHM and eFWHM
+                x = data['FWHM'][indices_multiple]
+                ex = data['eFWHM'][indices_multiple]
+                x_wa, ex_wa = _get_average_emg_entry(x, ex)
+
+                data['FWHM'][indices_multiple[0]] = x_wa
+                data['eFWHM'][indices_multiple[0]] = ex_wa
+
+
+                # Extract and Average: z and ez
+                x = data['z'][indices_multiple]
+                ex = data['ez'][indices_multiple]
+                x_wa, ex_wa = _get_average_emg_entry(x, ex)
+
+                data['z'][indices_multiple[0]] = x_wa
+                data['ez'][indices_multiple[0]] = ex_wa
+
+                # Extract and Average: u and eu
+                x = data['magnification'][indices_multiple]
+                ex = data['err_magnification'][indices_multiple]
+                x_wa, ex_wa = _get_average_emg_entry(x, ex)
+
+                data['magnification'][indices_multiple[0]] = x_wa
+                data['err_magnification'][indices_multiple[0]] = ex_wa
+
+                # Concatenate all references
+                ref = data['reference'][indices_multiple]
+                sep = ", "
+                references = sep.join(ref)
+                for j in indices_multiple:
+                    data['reference'][j] = references
+
+
 
     data = data[data['ID'] != 'REMOVE']
-
     return data
+
+#    # Set undefined magnification factors (u=-999) unity.
+#    indices = [i for i, item in enumerate(
+#               data['magnification']) if item == -999]
+#    if indices != []:
+#        for j in indices:
+#            data['magnification'][j] = 1.0
+#
+#    # Extract unique list of transitions.
+#    trans = list(set(data['transition']))
+#    ids = list(set(data['ID']))
+#
+#
+#    for var in trans:
+#        for var1 in ids:
+#            indices = [i for i, item in enumerate(
+#                       data['ID']) if item == var1]
+#
+#            x = data['SdV'][indices]
+#            ex = data['eSdV'][indices]
+#            x_wa = np.average(x, weights = 1./ex**2)
+#            ex_wa = np.sqrt(1./sum(1./ex**2))
+#            data['SdV'][indices[0]] = x_wa
+#            if 99 in ex:
+#                data['eSdV'][indices[0]] = 99
+#            else:
+#                data['eSdV'][indices[0]] = ex_wa
+#            data['ID'][indices[1:]] = ['REMOVE']*(len(indices) - 1)
+#
+#            x = data['FWHM'][indices]
+#            ex = data['eFWHM'][indices]
+#            x_wa = np.average(x, weights = 1./ex**2)
+#            ex_wa = np.sqrt(1. / sum(1. / ex**2))
+#            data['FWHM'][indices[0]] = x_wa
+#            data['eFWHM'][indices[0]] = ex_wa
+#
+#            x = data['z'][indices]
+#            ex = data['ez'][indices]
+#            x_wa = np.average(x, weights = 1./ex**2)
+#            ex_wa = np.sqrt(1./sum(1./ex**2))
+#            data['z'][indices[0]] = x_wa
+#            data['ez'][indices[0]] = ex_wa
+#
+#    data = data[data['ID'] != 'REMOVE']
 
 
 #
@@ -649,10 +781,17 @@ def add_lum_line_to_data(data):
     indices_ul =  [i for i,x in enumerate(data["eSdV"]) if x == 99]
     indices_ud =  [i for i,x in enumerate(data["eSdV"]) if x == -999]
 
+    # [Lprime]
     data["L_transition"] = line_lum(data["z"], data["SdV"], data["transition"])
     data["eL_transition"] = line_lum(data["z"], data["eSdV"], data["transition"])
     data["eL_transition"][indices_ul] = 99
     data["eL_transition"][indices_ud] = -999
+
+    # [Lsolar]
+    data["L_transition_solar"] = line_lum(data["z"], data["SdV"], data["transition"], units='solar')
+    data["eL_transition_solar"] = line_lum(data["z"], data["eSdV"], data["transition"], units='solar')
+    data["eL_transition_solar"][indices_ul] = 99
+    data["eL_transition_solar"][indices_ud] = -999
 
     return data
 
@@ -710,11 +849,11 @@ def complimentary_emg(data_1, data_2):
 
 #
 #
-def dump_data_fields_to_csv(data, fields):
+def dump_data_fields_to_csv(data, fields, csv_name):
     """Writes a csv file (out.csv) of the chosen fields in data.
     """
     mydata = data[fields]
-    out_file = open("out.csv", "w")
+    out_file = open("csv_name", "w")
     with out_file:
         writer = csv.writer(out_file)
         writer.writerows(mydata)

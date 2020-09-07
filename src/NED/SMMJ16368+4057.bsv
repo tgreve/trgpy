@@ -10,7 +10,7 @@ under cooperative agreement AST0122449 with The Johns Hopkins University.
 
 queryDateTime:2013-02-19T12:23:33PST
 
-
+z=2.38530
 
 Photometric Data for MM J163650+4057
 
@@ -36,5 +36,6 @@ No.|Observed Passband|Photometry Measurement|Uncertainty|Units|Frequency|NED Pho
 26|1200 microns (MAMBO)| 3.1       |+/-0.7  | milliJy            |2.50E+11|  3.10E-03|+/-7.00E-04|Jy|2004MNRAS.354..779G|uncertainty|      1200 microns   | Broad-band measurement|16 36 50.3 +40 57 36 (J2000)| Flux integrated from map|S/N = 4.42                              |From new raw data
 27|239.097 GHz (PdBI)  | 3.7       |+/-0.2  |milliJy             |2.39097E+11|  3.70E-03|+/-2.00E-04|Jy|2006ApJ...640..228T|uncertainty|     1.3   mm        | Broad-band measurement| | Flux integrated from map|                                        |From new raw data
 27|1.3 mm (PdBI)       | 2.6       |+/-0.5  |milliJy             |2.31E+11|  2.60E-03|+/-5.00E-04|Jy|2006ApJ...640..228T|uncertainty|     1.3   mm        | Broad-band measurement| | Flux integrated from map|                                        |From new raw data
+27|145.395 GHz (PdBI)  |           |<0.8  |milliJy             |1.45e+11| |8.00E-04|Jy|2006ApJ...640..228T|3 sigma|     1.3   mm        | Broad-band measurement| | Flux integrated from map|                                        |From new raw data
 28|1.4 GHz (VLA)       | 216       |+/-12   | microJy            |1.40E+09|  2.16E-04|+/-1.20E-05|Jy|2006MNRAS.371..963B|1 sigma|       1.4 GHz       | Broad-band measurement|16 36 50.425 +40 57 34.45 (J2000)| Flux integrated from map|                                        |Averaged new and previously published data
 29|1.4 GHz (VLA)       | 242       |+/-11   | microJy            |1.40E+09|  2.42E-04|+/-1.10E-05|Jy|2006MNRAS.371..963B|1 sigma|       1.4 GHz       | Broad-band measurement|16 36 50.425 +40 57 34.45 (J2000)| Flux integrated from map|                                        |Averaged new and previously published data

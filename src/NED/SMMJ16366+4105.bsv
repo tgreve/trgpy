@@ -11,7 +11,7 @@ under cooperative agreement AST0122449 with The Johns Hopkins University.
 queryDateTime:2013-02-19T12:06:08PST
 
 
-
+z=2.4494
 Photometric Data for SMM J163658.19+410523.8
 
 No.|Observed Passband|Photometry Measurement|Uncertainty|Units|Frequency|NED Photometry Measurement|NED Uncertainty|NED Units|Refcode|Significance|Published frequency|Frequency Mode|Coordinates Targeted|Spatial Mode|Qualifiers|Comments
