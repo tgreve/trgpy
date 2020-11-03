@@ -357,7 +357,8 @@ def extract_digame_csv(object_id='all', object_type='all', transition='all',
 
     # Open csv file.
     i = 0
-    cr = csv.reader(open("/Users/tgreve/Dropbox/Work/local/python/trgpy/src/digame_export.csv"))
+    #cr = csv.reader(open("/Users/tgreve/Dropbox/Work/local/python/trgpy/src/digame_export.csv"))
+    cr = csv.reader(open("digame_export.csv"))
     next(cr)
     for row in cr:
         data['ID'][i] = row[0].strip()
