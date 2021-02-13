@@ -357,7 +357,8 @@ def extract_digame_csv(object_id='all', object_type='all', transition='all',
 
     # Open csv file.
     i = 0
-    cr = csv.reader(open("/Users/tgreve/Dropbox/Work/local/python/trgpy/src/digame_export.csv"))
+    #cr = csv.reader(open("/Users/tgreve/Dropbox/Work/local/python/trgpy/src/digame_export.csv"))
+    cr = csv.reader(open("digame_export.csv"))
     next(cr)
     for row in cr:
         data['ID'][i] = row[0].strip()
@@ -426,7 +427,8 @@ def extract_digame_csv(object_id='all', object_type='all', transition='all',
 #
 #
 def extract_emg_csv(object_id='all', object_type='all', transition='all',
-                    reference='all', flag_include=False, verbose=False):
+                    reference='all', zmin=0., zmax=20., flag_include=False,
+                    verbose=False):
     """ PURPOSE:
             Extract data entries from emg.csv file according to the object_id,
             object_type and transition criteria. If flag_include=True, only
@@ -481,8 +483,8 @@ def extract_emg_csv(object_id='all', object_type='all', transition='all',
 
     # Open csv file.
     i = 0
-    cr = csv.reader(open("/Users/tgreve/Dropbox/Work/local/python/trgpy/src/EMGs-v1.3.csv"))
-    #cr = csv.reader(open("/Users/tgreve/Dropbox/Work/local/python/trgpy/src/digame_export.csv"))
+    #cr = csv.reader(open("/Users/tgreve/Dropbox/Work/local/python/trgpy/src/EMGs-v1.3.csv"))
+    cr = csv.reader(open("/Users/tgreve/Dropbox/Work/local/python/trgpy/src/digame_export.csv"))
     for row in cr:
         if row[2] == '0' or row[2] == '1':
         #if row[2] != "NAN":
@@ -538,6 +540,10 @@ def extract_emg_csv(object_id='all', object_type='all', transition='all',
         data = data[data['reference'] == reference]
     if flag_include:
         data = data[data['include'] == '1']
+
+    # Select sources within zmin:zmax
+    data = data[data['z'] > zmin]
+    data = data[data['z'] < zmax]
 
     # Remove empty ID strings
     data = data[data['ID'] != '']
