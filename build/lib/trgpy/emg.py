@@ -265,7 +265,7 @@ def line_flux_conversion(frq, sdv, conversion='jansky2si'):
 
         STATUS:
             02.02.15: started
-            10.02.17: updated
+ def line_flux_conversion(frq, sdv, conversion='jansky2si'):            10.02.17: updated
             07.11.18: python 3.6.6 compatible. Can take single values or lists.
             21.05.19: Fixed: can take single value, array, or list as input.
     """
@@ -317,7 +317,7 @@ def line_flux_conversion(frq, sdv, conversion='jansky2si'):
 def extract_digame_csv(object_id='all', object_type='all', transition='all',
                     reference='all', zmin=0., zmax=20., verbose=False):
     """ PURPOSE:
-            Extract data entries from digame.csv file according to the object_id,
+            Extract data entries from digame/digame_db.csv file according to the object_id,
             object_type and transition criteria.
 
         INPUT:
@@ -358,9 +358,17 @@ def extract_digame_csv(object_id='all', object_type='all', transition='all',
     # Open csv file.
     i = 0
     #cr = csv.reader(open("/Users/tgreve/Dropbox/Work/local/python/trgpy/src/digame_export.csv"))
-    cr = csv.reader(open("digame_export.csv"))
+    # WRONG FORMAT - SHOULD BE digame_export file directly from digame-db.online
+    cr = csv.reader(open("/Users/tgreve/Dropbox/NEW-SETUP/C.Code/local/python/trgpy/src/digame_export.csv"))
+    #cr = csv.reader(open("digame_export.csv"))
     next(cr)
     for row in cr:
+        print(row[0].strip())
+        print(row[1].strip())
+        print(row[2].strip())
+        print(row[3].strip())
+        print(row[4].strip())
+        print("-------------------")
         data['ID'][i] = row[0].strip()
         data['type'][i] = row[1].strip()
         data['transition'][i] = row[2].strip()
@@ -474,7 +482,8 @@ def extract_emg_csv(object_id='all', object_type='all', transition='all',
                                     ('L_transition_solar_delensed', float),
                                     ('eL_transition_solar_delensed', float),
                                     ('L_transition_delensed', float),
-                                    ('eL_transition_delensed', float)
+                                    ('eL_transition_delensed', float),
+                                    ('REF_URL', list),
                                     ])
 
     #ID,ID_ALT,IO,YEAR,TYPE,LINE,Z_OPT,ERR_Z_OPT,Z_LINE,ERR_Z_LINE,FWHM,ERR_FWHM,IDV,ERR_IDV,MAG,ERR_MAG,REF,COMMENTS,LIR_LIT,ERR_LIR_LIT,MSTAR,GOOD_FIT,LIR_CIGALE,LFIR_CIGALE,REF_URL,NED_URL
@@ -483,8 +492,8 @@ def extract_emg_csv(object_id='all', object_type='all', transition='all',
 
     # Open csv file.
     i = 0
-    #cr = csv.reader(open("/Users/tgreve/Dropbox/Work/local/python/trgpy/src/EMGs-v1.3.csv"))
-    cr = csv.reader(open("/Users/tgreve/Dropbox/Work/local/python/trgpy/src/digame_export.csv"))
+    #cr = csv.reader(open("/Users/tgreve/Dropbox/NEW-SETUP/C.Code/local/python/trgpy/src/EMGs-v1.3.csv"))
+    cr = csv.reader(open("/Users/tgreve/Dropbox/NEW-SETUP/C.Code/local/python/trgpy/src/digame_export.csv"))
     for row in cr:
         if row[2] == '0' or row[2] == '1':
         #if row[2] != "NAN":
@@ -510,6 +519,7 @@ def extract_emg_csv(object_id='all', object_type='all', transition='all',
             data['magnification'][i] = row[14]
             data['reference'][i] = row[16]
             data['reference_url'][i] = row[24]
+            data['REF_URL'][i] = row[24]
             data['NED_url'][i] = row[25]
             data['err_magnification'][i] = float(row[15])
             if row[18] != '' and row[18] != '-999':
@@ -1013,7 +1023,8 @@ def add_csv_to_emg(in_file, out_file=None):
         print("Error: File does not appear to exist.")
 
     # Read in master .csv file
-    master_csv_file = "/Users/tgreve/Dropbox/Work/EMGs/web/test-scripts/EMGs-test.csv"
+    #master_csv_file = "/Users/tgreve/Dropbox/Work/EMGs/web/test-scripts/EMGs-test.csv"
+    master_csv_file = "/Users/tgreve/Dropbox/NEW-SETUP/C.Research/EMGs/web/test-scripts/EMGs-test.csv"
     try:
         df_master = pd.read_csv(master_csv_file, names=["ID",
             "ID_ALT","IO","YEAR","TYPE","LINE","Z_OPT","ERR_Z_OPT",

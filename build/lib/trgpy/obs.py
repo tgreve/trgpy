@@ -32,7 +32,8 @@ def atmospheric_transmission(pwv=1.00):
     """
 
     #Read in atmospheric model
-    f=open('/Users/tgreve/Dropbox/Work/local/python/trgpy/src/atm-models/plot.data','r')
+    #f=open('/Users/tgreve/Dropbox/Work/local/python/trgpy/src/atm-models/plot.data','r')
+    f=open('/Users/tgreve/Dropbox/NEW-SETUP/C.Code/local/python/trgpy/src/atm-models/plot.data','r')
     lines=f.readlines()[5:]
     f.close()
 

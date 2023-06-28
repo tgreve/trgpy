@@ -6,6 +6,12 @@ from astropy import units as u
 #     freq[H2OJlo]=frequency[GHz]
 # *******************************************************
 freq=OrderedDict()
+
+# Optical lines
+freq['H_alpha']=456805.02406743454
+freq['H_beta']=616730.0102859495
+freq['Pa_alpha']=616730.0102859495
+
 freq['[CI]609']=492160.7000/1.E3
 freq['[CI]370']=809343.5000/1.E3
 freq['[CII]158']=1900.53690000
@@ -152,6 +158,8 @@ freq['HCN(3-2,v2=1,I=1e)']=	265852.71/1.E3
 freq['HCN(3-2,v2=1,I=1f)']=	267199.28/1.E3
 freq['HCN(4-3,v2=1,I=1e)']=	354460.43/1.E3
 freq['HCN(4-3,v2=1,I=1f)']=	356255.57/1.E3
+freq['HCN(5-4,v2=1,I=1e)']=	443.0597
+freq['HCN(5-4,v2=1,I=1f)']=	445.3031
 freq['H13CN(1-0)']=	86339.92         /1.E3
 freq['H13CN(2-1)']=	172677.84        /1.E3
 freq['H13CN(3-2)']=	259011.79        /1.E3
